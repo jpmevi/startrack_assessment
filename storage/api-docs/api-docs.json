@@ -195,7 +195,7 @@
                         "name": "query",
                         "in": "query",
                         "description": "Filter by Query parameter",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -203,8 +203,8 @@
                     {
                         "name": "startDate",
                         "in": "query",
-                        "description": "Filter by Creation Date parameter",
-                        "required": true,
+                        "description": "Filter by Start Date parameter",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -212,8 +212,8 @@
                     {
                         "name": "endDate",
                         "in": "query",
-                        "description": "Filter by Creation Date parameter",
-                        "required": true,
+                        "description": "Filter by End Date parameter",
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
@@ -222,7 +222,7 @@
                         "name": "query",
                         "in": "query",
                         "description": "Filter by Query parameter",
-                        "required": true,
+                        "required": false,
                         "schema": {
                             "type": "string"
                         }
