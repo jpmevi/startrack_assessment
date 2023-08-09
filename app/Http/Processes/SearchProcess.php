@@ -2,6 +2,7 @@
 
 namespace App\Http\Processes;
 
+use App\Http\Repositories\StatRepository;
 use App\Http\Transformers\BaseTransformer;
 use App\Http\Validators\SearchValidator;
 use App\Services\StackExchangeService;
@@ -12,21 +13,25 @@ class SearchProcess
 {
 
     private $baseTransformer;
-    private $searchProcess;
+    private $stackExchangeService;
     private $searchValidator;
+    private $statRepository;
 
     /**
      * SearchProcess constructor.
      * @param BaseTransformer $baseTransformer
      * @param SearchValidator $searchValidator
+     * @param StatRepository $statRepository
      */
     public function __construct(
         BaseTransformer $baseTransformer,
-        SearchValidator $searchValidator
+        SearchValidator $searchValidator,
+        StatRepository $statRepository
     ) {
         $this->baseTransformer = $baseTransformer;
         $this->searchValidator = $searchValidator;
-        $this->searchProcess = StackExchangeService::getInstance();
+        $this->stackExchangeService = StackExchangeService::getInstance();
+        $this->statRepository = $statRepository;
     }
 
     /**
@@ -49,8 +54,9 @@ class SearchProcess
             $query = $request->get('query');
             $page = $request->get('page');
             $pagesize = $request->get('pagesize');
-            $response = $this->searchProcess->search($query, $page, $pagesize);
+            $response = $this->stackExchangeService->search($query, $page, $pagesize);
             if ($response['code'] === 200) {
+                $this->statRepository->store($query, $page, $pagesize);
                 return $this->baseTransformer->transformToApiResponse(IlluminateResponse::HTTP_OK, 'Success', trans(''), $response['data']);
             }
             return $this->baseTransformer->transformToApiResponse($response['code'], 'Failure', trans($response['message']));
