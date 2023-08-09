@@ -31,9 +31,9 @@ class StatController extends Controller
      * 
      * 
      * @OA\Get(
-     *     path="/api/stat",
+     *     path="/api/stats",
      *     tags={"Stat"},
-     *     operationId="/api/stat",
+     *     operationId="/api/stats",
      *     description="Handle the request to retrieve stat results",
      * @OA\Parameter(
      *          name="query",

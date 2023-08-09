@@ -182,14 +182,14 @@
                 }
             }
         },
-        "/api/stat": {
+        "/api/stats": {
             "get": {
                 "tags": [
                     "Stat"
                 ],
                 "summary": "Handle the request to retrieve stat results.",
                 "description": "Handle the request to retrieve stat results",
-                "operationId": "/api/stat",
+                "operationId": "/api/stats",
                 "parameters": [
                     {
                         "name": "query",
