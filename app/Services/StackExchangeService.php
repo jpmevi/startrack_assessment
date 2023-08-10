@@ -97,10 +97,11 @@ class StackExchangeService
                 $result = [];
                 foreach ($data['items'] as $item) {
                     $result[] = [
-                        'title' => $item['title'],
-                        'answer_count' => $item['answer_count'],
-                        'username' => $item['owner']['display_name'],
-                        'profile_picture' => $item['owner']['profile_image'],
+                        'title' => array_key_exists('title',$item) ? $item['title'] : null,
+                        'answer_count' => array_key_exists('answer_count',$item) ? $item['answer_count'] : null,
+                        'username' => array_key_exists('owner',$item) ? $item['owner']['display_name'] : null,
+                        'profile_picture' => array_key_exists('owner',$item) ? $item['owner']['profile_image'] : null,
+                        'score' => array_key_exists('score',$item) ? $item['score'] : null,
                     ];
                 }
 
